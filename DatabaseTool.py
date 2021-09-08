@@ -112,7 +112,7 @@ def insert_person_log(idPeople_id, idCam_id, mask, date, time, image):
     INSERT INTO LogApp_personlog(idPeople_id, idCam_id, mask, date, time, image)
     VALUES (%s,%s,%s,%s,%s,%s)
     """
-    args = (idCam_id, idCam_id, mask, date, time, 'person-log.s3.ap-southeast-1.amazonaws.com/' + image)
+    args = (idPeople_id, idCam_id, mask, date, time, 'person-log.s3.ap-southeast-1.amazonaws.com/' + image)
     try:
         db_config = read_db_config()
         conn = MySQLConnection(**db_config)

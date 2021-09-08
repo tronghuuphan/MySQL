@@ -1,5 +1,6 @@
 from mysql.connector import MySQLConnection, Error
-from python_mysql_dbconfig import read_db_config
+from aws_config import read_db_config, read_aws_config
+from upload_image import upload_to_aws
 
 def get_all_id():
     query = """
@@ -40,7 +41,7 @@ def get_camera_id():
         cursor.close()
         conn.close()
 
-def insert_person(name):
+def insert_person(name, image_file):
     query = """
     INSERT INTO LogApp_person(name)
     VALUES (%s)"""
@@ -53,6 +54,7 @@ def insert_person(name):
         cursor.execute(query, args)
 
         conn.commit()
+        upload_to_aws(image_file, image_file)
     except Error as e:
         print(e)
     finally:
